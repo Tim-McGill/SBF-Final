@@ -23,7 +23,6 @@ public class Mobile_Control extends ApplicationAdapter implements InputProcessor
     // other files
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        System.out.println(screenX);
         // move joystick into view
             if (nInput == 1) {
                 if (screenX < Gdx.graphics.getWidth() / 2) {
@@ -42,13 +41,17 @@ public class Mobile_Control extends ApplicationAdapter implements InputProcessor
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         if (nInput==1) {
+            if(screenX<2*(Gdx.graphics.getWidth()/3)){
             nJoyStickX = -200;
             nJoyStickY = -200;
             nJoyStickNubX = nJoyStickX + 64;
             nJoyStickNubY = nJoyStickY + 64;
             nDx = nDy = 0;
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 4; i++) {
                 arbInput[i] = false;
+            }
+            } else {
+                arbInput[5]=false;
             }
             gameScreen.Mobile_intput(arbInput);
         } else if(nInput==2) {
@@ -81,53 +84,30 @@ public class Mobile_Control extends ApplicationAdapter implements InputProcessor
                     // setting input booleans
                     nDx = ((nJoyStickNubX + 36) - (nJoyStickX + 100));
                     nDy = ((nJoyStickNubY + 36) - (nJoyStickY + 100));
-                    if (nDy > 0) {
+                    // the plus or minus 5 is to give a small dead zone for the joy stick
+                    if (nDy > 5 && Math.abs(nDy)>Math.abs(nDx)) {
                         arbInput[1] = true;// up
                         arbInput[2] = false;//down
-                        arbInput[3] = false;//right
-                        arbInput[4] = false;//left
+                        arbInput[3]=false; //right
+                        arbInput[4]=false;//left
                     }
-                    if (nDy < 0) {
-                        arbInput[1] = false;
+                   else if (nDy < -5 && Math.abs(nDy)>Math.abs(nDx)) {
+                        arbInput[1] = false;// up
                         arbInput[2] = true;//down
-                        arbInput[3] = false;//right
-                        arbInput[4] = false;//left
+                        arbInput[3]=false; //right
+                        arbInput[4]=false;//left
                     }
-                    if (nDx > 0) {
-                        arbInput[3] = true;// right
-                        arbInput[4] = false;
+                    else if (nDx > 5&& Math.abs(nDx)>Math.abs(nDy)) {
                         arbInput[1] = false;// up
                         arbInput[2] = false;//down
+                        arbInput[3]=true; //right
+                        arbInput[4]=false;//left
                     }
-                    if (nDx < 0) {
-                        arbInput[4] = true;//left
-                        arbInput[3] = false;
+                   else if (nDx < -5&& Math.abs(nDx)>Math.abs(nDy)) {
                         arbInput[1] = false;// up
                         arbInput[2] = false;//down
-                    }
-                    if(nDx<0&&nDy>0){
-                        arbInput[4] = true;//left
-                        arbInput[1] = true;// up
-                        arbInput[3] = false;//right
-                        arbInput[2] = false;//down
-                    }
-                    if(nDx>0&&nDy>0){
-                        arbInput[4] = false;//left
-                        arbInput[1] = true;// up
-                        arbInput[3] = true;//right
-                        arbInput[2] = false;//down
-                    }
-                    if(nDx>0&&nDy<0){
-                        arbInput[4] = false;//left
-                        arbInput[1] = false;// up
-                        arbInput[3] = true;//right
-                        arbInput[2] = true;//down
-                    }
-                    if(nDx<0&&nDy<0){
-                        arbInput[4] = true;//left
-                        arbInput[1] = false;// up
-                        arbInput[3] = false;//right
-                        arbInput[2] = true;//down
+                        arbInput[3]=false; //right
+                        arbInput[4]=true;//left
                     }
                    gameScreen.Mobile_intput(arbInput);
                 }

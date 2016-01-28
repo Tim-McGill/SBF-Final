@@ -22,7 +22,7 @@ public class Main_desktop extends Game {
         SoundTrack.play();
 
         game = this;
-        setScreen(new MainMenu(game,false));
+        setScreen(new MainMenu(game,true));
     }
     public void render() {
         super.render();
