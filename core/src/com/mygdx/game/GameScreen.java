@@ -43,7 +43,7 @@ public class GameScreen implements Screen, InputProcessor {
     boolean arbInput[] = new boolean[6], arbAgro[]= new boolean[91],bMobile;
     int nDx,nDy,nPx=320,nPy=2432, nLDx[]= new int[4],nLDy[]= new int[4],nLDp=0,nEx[]=new int[91],nEy[]= new int[91],nKey=0,nPlayer=1;
     int nKeyx[]=new int[2], nKeyy[] = new int[2], nKeyp=0, nTelx, nTely,nDEx,nDEy,nHealth=100, nDelay[]= new int[91],nBossHealth=8;
-    int nEHealth[] = new int[91];
+    int nEHealth[] = new int[91],nRan;
     // end of vars sorry for the massive amounts of ints
     public GameScreen(Game game, int nPlayer_,boolean mobile_){
         this.game = game;
@@ -170,9 +170,13 @@ public class GameScreen implements Screen, InputProcessor {
         stage = new Stage(new FillViewport(320,180,camera));
         stage.getViewport().setCamera(camera);
         stage.getViewport().apply();
-
+        nRan = (int)(Math.random()*100);
         // tiled map
-        tiledMap = new TmxMapLoader().load("level1.tmx");
+        if(nRan<60) {
+            tiledMap = new TmxMapLoader().load("level1.tmx");
+        } else {
+            tiledMap = new TmxMapLoader().load("level2.tmx");
+        }
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         objectplace();
         if(!bMobile){
