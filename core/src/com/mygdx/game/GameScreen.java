@@ -175,7 +175,9 @@ public class GameScreen implements Screen, InputProcessor {
         tiledMap = new TmxMapLoader().load("level1.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         objectplace();
+        if(!bMobile){
             Gdx.input.setInputProcessor(this);
+        }
         camera.position.set(nPx, nPy, 0);
     }
 

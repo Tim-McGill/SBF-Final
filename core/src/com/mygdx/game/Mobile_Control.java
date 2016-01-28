@@ -83,19 +83,51 @@ public class Mobile_Control extends ApplicationAdapter implements InputProcessor
                     nDy = ((nJoyStickNubY + 36) - (nJoyStickY + 100));
                     if (nDy > 0) {
                         arbInput[1] = true;// up
-                        arbInput[2] = false;
+                        arbInput[2] = false;//down
+                        arbInput[3] = false;//right
+                        arbInput[4] = false;//left
                     }
                     if (nDy < 0) {
                         arbInput[1] = false;
                         arbInput[2] = true;//down
+                        arbInput[3] = false;//right
+                        arbInput[4] = false;//left
                     }
                     if (nDx > 0) {
                         arbInput[3] = true;// right
                         arbInput[4] = false;
+                        arbInput[1] = false;// up
+                        arbInput[2] = false;//down
                     }
                     if (nDx < 0) {
                         arbInput[4] = true;//left
                         arbInput[3] = false;
+                        arbInput[1] = false;// up
+                        arbInput[2] = false;//down
+                    }
+                    if(nDx<0&&nDy>0){
+                        arbInput[4] = true;//left
+                        arbInput[1] = true;// up
+                        arbInput[3] = false;//right
+                        arbInput[2] = false;//down
+                    }
+                    if(nDx>0&&nDy>0){
+                        arbInput[4] = false;//left
+                        arbInput[1] = true;// up
+                        arbInput[3] = true;//right
+                        arbInput[2] = false;//down
+                    }
+                    if(nDx>0&&nDy<0){
+                        arbInput[4] = false;//left
+                        arbInput[1] = false;// up
+                        arbInput[3] = true;//right
+                        arbInput[2] = true;//down
+                    }
+                    if(nDx<0&&nDy<0){
+                        arbInput[4] = true;//left
+                        arbInput[1] = false;// up
+                        arbInput[3] = false;//right
+                        arbInput[2] = true;//down
                     }
                    gameScreen.Mobile_intput(arbInput);
                 }
